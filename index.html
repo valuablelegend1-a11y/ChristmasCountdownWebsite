@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Countdown</title>
+
+    <style>
+        /* A universal selector reset for predictable behavior and no extra margins/padding */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* BASE STYLES & CONTAINER */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #bce1f7;
+            color: #004d40;
+            height: 100vh;
+            overflow: hidden; /* NO SCROLLING */
+            position: relative;
+        }
+
+        /* --- Main Content Positioning (Raised and Centered Horizontally) --- */
+        h1 {
+            position: absolute; z-index: 10; width: 100%;
+            top: 5vh; /* Very high up on the screen */
+            font-size: 2em; text-align: center;
+        }
+
+        #countdown-container {
+            position: absolute; z-index: 10; width: 100%;
+            top: 15vh; /* The time is positioned just below the H1 */
+            font-size: 2.5em; color: #d50000; text-align: center; /* Ensures it is centered */
+        }
+
+        .time-unit { font-weight: bold; color: #004d40; }
+
+        /* TREE STYLES (Balanced sizes and positioning) */
+        .tree { position: absolute; background-size: contain; background-repeat: no-repeat; z-index: 5; }
+        #tree-left { width: 62vw; height: 62vw; left: -10vw; bottom: 15vh; background-image: url('tree.png'); }
+        #tree-right { width: 40vw; height: 40vw; right: -5vw; bottom: 25vh; background-image: url('tree.png'); }
+
+        /* SNOWPILE STYLES (Bottom of page must be exactly the bottom of the snowbank) */
+        #snow-ground {
+            position: absolute; bottom: 0; left: 0;
+            right: -21px;
+            height: 30vh; /* Set height using VH for scaling */
+            background-color: #ffffff;
+            z-index: 4;
+            border-radius: 80% 30% 0 0 / 100px 50px 0 0;
+        }
+
+        /* --- RESTORED PURE CSS SNOWFALL CSS (Slower and Less Gappy) --- */
+        .snow-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 8; }
+
+        .snow {
+            position: absolute; width: 5px; height: 5px; background: white; border-radius: 50%;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+            animation: fall linear infinite;
+        }
+
+        /* Vary speeds and durations widely to minimize waving and slow the fall */
+        .snow:nth-child(1) { animation-duration: 20s; opacity: 0.9; }
+        .snow:nth-child(2) { animation-duration: 18s; opacity: 0.7; }
+        .snow:nth-child(3) { animation-duration: 15s; opacity: 1; }
+        .snow:nth-child(4) { animation-duration: 22s; opacity: 0.8; }
+        .snow:nth-child(5) { animation-duration: 17s; opacity: 0.75; }
+        .snow:nth-child(6) { animation-duration: 19s; opacity: 0.9; }
+        .snow:nth-child(7) { animation-duration: 23s; opacity: 0.8; }
+        .snow:nth-child(8) { animation-duration: 16s; opacity: 0.7; }
+        .snow:nth-child(9) { animation-duration: 21s; opacity: 1; }
+        .snow:nth-child(10) { animation-duration: 14s; opacity: 0.85; }
+        .snow:nth-child(11) { animation-duration: 24s; opacity: 0.9; }
+        .snow:nth-child(12) { animation-duration: 13s; opacity: 0.7; }
+        .snow:nth-child(13) { animation-duration: 16.5s; opacity: 1; }
+        .snow:nth-child(14) { animation-duration: 19.5s; opacity: 0.8; }
+        .snow:nth-child(15) { animation-duration: 12.5s; opacity: 0.75; }
+        .snow:nth-child(16) { animation-duration: 20.5s; opacity: 0.9; }
+        .snow:nth-child(17) { animation-duration: 17.5s; opacity: 0.8; }
+        .snow:nth-child(18) { animation-duration: 14.5s; opacity: 0.7; }
+
+        /* The actual movement definition */
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0.5; } /* Falls full screen height */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Time Until Christmas</h1>
+
+    <div id="countdown-container">
+        <span id="days" class="time-unit">00</span> days,
+        <span id="hours" class="time-unit">00</span> hours,
+        <span id="minutes" class="time-unit">00</span> minutes,
+        <span id="seconds" class="time-unit">00</span> seconds
+    </div>
+
+    <!-- Trees and Snow are positioned absolutely relative to the BODY/full screen -->
+    <div class="snow-container">
+        <!-- Snow divs remain here -->
+        <div class="snow" style="left: 5%;"></div><div class="snow" style="left: 15%;"></div><div class="snow" style="left: 25%;"></div>
+        <div class="snow" style="left: 35%;"></div><div class="snow" style="left: 45%;"></div><div class="snow" style="left: 55%;"></div>
+        <div class="snow" style="left: 65%;"></div><div class="snow" style="left: 75%;"></div><div class="snow" style="left: 85%;"></div>
+        <div class="snow" style="left: 95%;"></div><div class="snow" style="left: 10%;"></div><div class="snow" style="left: 20%;"></div>
+        <div class="snow" style="left: 40%;"></div><div class="snow" style="left: 60%;"></div><div class="snow" style="left: 80%;"></div>
+        <div class="snow" style="left: 90%;"></div><div class="snow" style="left: 30%;"></div><div class="snow" style="left: 70%;"></div>
+    </div>
+
+    <div id="tree-left" class="tree"></div>
+    <div id="tree-right" class="tree"></div>
+    <div id="snow-ground"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
